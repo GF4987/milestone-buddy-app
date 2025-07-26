@@ -149,7 +149,32 @@ const Index = () => {
                       value={(campaign.currentAmount / campaign.goalAmount) * 100} 
                       className="h-2"
                     />
-                    
+                    ```html
+                    <div className="relative h-2 bg-muted rounded-full mb-4 overflow-hidden">
+                      {milestones.map((milestone, index) => (
+                        <span
+                          key={index}
+                          className="absolute top-0 left-0 w-8 h-8 rounded-full border-2 flex items-center justify-center"
+                          style={{
+                            backgroundColor:
+                              milestone.status === "completed"
+                                ? "#4CAF50"
+                                : "#9E9E9E",
+                            borderColor: "rgba(16, 37, 85, 0.3)",
+                            transitionDuration: "300ms",
+                            transformOrigin: "center",
+                          }}
+                        >
+                          {milestone.status === "completed" && (
+                            <Check className="w-4 h-4" />
+                          )}
+                          {milestone.status === "current" && (
+                            <div className="w-3 h-3 bg-primary rounded-full animate-pulse" />
+                          )}
+                        </span>
+                      ))}
+                    </div>
+                    ```
                     <div className="flex justify-between">
                       <div>
                         <div className="font-semibold text-primary">
