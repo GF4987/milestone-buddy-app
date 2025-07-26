@@ -15,7 +15,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { campaigns } from "@/data/campaigns";
-import { MilestoneStatusBar } from "../components/MilestoneStatusBar"; // import the new component here
 
 const Index = () => {
   const stats = [
