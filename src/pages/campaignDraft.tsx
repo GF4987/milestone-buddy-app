@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function CampaignDraft() {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [goalAmount, setGoalAmount] = useState(0);
@@ -10,7 +12,17 @@ function CampaignDraft() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Campaign draft submitted");
+    
+    // Navigate to milestone management with campaign data
+    navigate('/milestone-management', {
+      state: {
+        title,
+        description,
+        goalAmount,
+        daysLeft,
+        currentAmount
+      }
+    });
   };
 
   return (
