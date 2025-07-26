@@ -1,16 +1,16 @@
-import React from 'react';
-import { useState } from 'react';
+import React from "react";
+import { useState } from "react";
 
 function CampaignDraft() {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [goalAmount, setGoalAmount] = useState(0);
   const [daysLeft, setDaysLeft] = useState(0);
   const [currentAmount, setCurrentAmount] = useState(0);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Campaign draft submitted');
+    console.log("Campaign draft submitted");
   };
 
   return (
@@ -27,17 +27,23 @@ function CampaignDraft() {
           onChange={(event) => setTitle(event.target.value)}
           className="w-full px-4 py-2 mb-3 text-gray-700 border rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
-        <label htmlFor="description" className="block text-sm font-semibold mb-1">
+        <label
+          htmlFor="description"
+          className="block text-sm font-semibold mb-1"
+        >
           Description
         </label>
         <textarea
           id="description"
           value={description}
           onChange={(event) => setDescription(event.target.value)}
-          rows="4"
+          rows={4}
           className="w-full px-4 py-2 mb-3 text-gray-700 border rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
-        <label htmlFor="goalAmount" className="block text-sm font-semibold mb-1">
+        <label
+          htmlFor="goalAmount"
+          className="block text-sm font-semibold mb-1"
+        >
           Goal Amount
         </label>
         <input
@@ -57,7 +63,10 @@ function CampaignDraft() {
           onChange={(event) => setDaysLeft(Number(event.target.value))}
           className="w-full px-4 py-2 mb-3 text-gray-700 border rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500"
         />
-        <label htmlFor="currentAmount" className="block text-sm font-semibold mb-1">
+        <label
+          htmlFor="currentAmount"
+          className="block text-sm font-semibold mb-1"
+        >
           Current Amount
         </label>
         <input
