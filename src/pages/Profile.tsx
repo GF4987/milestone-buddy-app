@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { User, Film, Plus, Calendar, DollarSign, Users, Edit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -46,13 +47,10 @@ export default function Profile() {
   const [isCreateCampaignOpen, setIsCreateCampaignOpen] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleCreateCampaign = () => {
-    toast({
-      title: "Campaign Creation Started",
-      description: "Your campaign draft has been created. You can continue editing in your dashboard.",
-    });
-    setIsCreateCampaignOpen(false);
+    navigate('/create-campaign');
   };
 
   const handleUpdateProfile = () => {
@@ -117,40 +115,10 @@ export default function Profile() {
                 </DialogContent>
               </Dialog>
 
-              <Dialog open={isCreateCampaignOpen} onOpenChange={setIsCreateCampaignOpen}>
-                <DialogTrigger asChild>
-                  <Button>
-                    <Plus className="mr-2 h-4 w-4" />
-                    Create Campaign
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-md">
-                  <DialogHeader>
-                    <DialogTitle>Create New Campaign</DialogTitle>
-                  </DialogHeader>
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="title">Project Title</Label>
-                      <Input id="title" placeholder="Enter your film title" />
-                    </div>
-                    <div>
-                      <Label htmlFor="genre">Genre</Label>
-                      <Input id="genre" placeholder="e.g., Drama, Horror, Documentary" />
-                    </div>
-                    <div>
-                      <Label htmlFor="goal">Funding Goal ($)</Label>
-                      <Input id="goal" type="number" placeholder="25000" />
-                    </div>
-                    <div>
-                      <Label htmlFor="description">Short Description</Label>
-                      <Textarea id="description" placeholder="Briefly describe your project..." />
-                    </div>
-                    <Button onClick={handleCreateCampaign} className="w-full">
-                      Create Campaign Draft
-                    </Button>
-                  </div>
-                </DialogContent>
-              </Dialog>
+              <Button onClick={handleCreateCampaign}>
+                <Plus className="mr-2 h-4 w-4" />
+                Create Campaign
+              </Button>
             </div>
           </div>
         </div>
