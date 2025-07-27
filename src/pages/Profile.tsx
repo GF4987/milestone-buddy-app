@@ -101,6 +101,9 @@ export default function Profile() {
                 <DialogContent className="sm:max-w-md">
                   <DialogHeader>
                     <DialogTitle>Edit Profile</DialogTitle>
+                    <p className="text-sm text-muted-foreground">
+                      Update your filmmaker profile information and contact details.
+                    </p>
                   </DialogHeader>
                   <div className="space-y-4">
                     <div>

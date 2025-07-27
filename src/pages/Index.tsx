@@ -165,7 +165,7 @@ const Index = () => {
                   <div className="flex items-center gap-2 mb-3">
                     <Badge variant="secondary">{campaign.genre}</Badge>
                     <Badge variant="outline" className="capitalize">
-                      {campaign.status.replace("-", " ")}
+                      {campaign.status ? campaign.status.replace("-", " ") : "Active"}
                     </Badge>
                   </div>
 

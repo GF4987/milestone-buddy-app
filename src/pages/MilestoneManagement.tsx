@@ -290,6 +290,9 @@ export default function MilestoneManagement() {
                 <DialogContent>
                   <DialogHeader>
                     <DialogTitle>Add New Milestone</DialogTitle>
+                    <p className="text-sm text-muted-foreground">
+                      Create a new milestone for your campaign with specific funding goals and deliverables.
+                    </p>
                   </DialogHeader>
                   <div className="space-y-4">
                     <div>

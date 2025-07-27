@@ -171,8 +171,11 @@ export default function Admin() {
                           <DialogHeader>
                             <DialogTitle className="flex items-center gap-2">
                               <FileText className="w-5 h-5" />
-                              Confidential: {campaign.title}
+                              Campaign Details - {selectedCampaign?.title}
                             </DialogTitle>
+                            <p className="text-sm text-muted-foreground">
+                              View confidential campaign information including scripts, budgets, and production details.
+                            </p>
                           </DialogHeader>
                           
                           {selectedCampaign && (
