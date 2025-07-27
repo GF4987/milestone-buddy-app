@@ -8,38 +8,39 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 126 29% 31%;
-    --foreground: 41 100% 93%;
+    --background: 41 100% 93%;
+    --foreground: 0 0% 0%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 22 23% 30%;
+    --card: 41 100% 95%;
+    --card-foreground: 0 0% 0%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 22 23% 30%;
+    --popover: 41 100% 95%;
+    --popover-foreground: 0 0% 0%;
 
-    --primary: 41 100% 93%;
-    --primary-foreground: 126 29% 31%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 41 100% 93%;
 
-    --secondary: 126 29% 31%;
-    --secondary-foreground: 41 100% 93%;
+    --secondary: 41 100% 85%;
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 126 29% 31%;
-    --muted-foreground: 41 100% 85%;
+    --muted: 41 100% 85%;
+    --muted-foreground: 0 0% 40%;
 
-    --accent: 22 23% 50%;
+    --accent: 22 23% 30%;
     --accent-foreground: 41 100% 93%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 41 100% 93%;
 
-    --border: 22 23% 90%;
-    --input: 22 23% 90%;
-    --ring: 41 100% 93%;
+    --border: 0 0% 20%;
+    --input: 41 100% 90%;
+    --ring: 0 0% 0%;
 
-    /* Custom filmmaking colors - swapped */
-    --sage-green: 41 100% 93%;
-    --warm-cream: 126 29% 31%;
+    /* Custom filmmaking colors - black text on cream */
+    --sage-green: 126 29% 31%;
+    --warm-cream: 41 100% 93%;
     --rich-brown: 22 23% 30%;
+    --deep-black: 0 0% 0%;
 
     --radius: 0.5rem;
 
@@ -61,33 +62,33 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 41 100% 15%;
-    --foreground: 126 29% 90%;
+    --background: 0 0% 5%;
+    --foreground: 41 100% 93%;
 
-    --card: 41 100% 20%;
-    --card-foreground: 126 29% 90%;
+    --card: 0 0% 10%;
+    --card-foreground: 41 100% 93%;
 
-    --popover: 41 100% 20%;
-    --popover-foreground: 126 29% 90%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 41 100% 93%;
 
-    --primary: 126 29% 70%;
-    --primary-foreground: 41 100% 15%;
+    --primary: 41 100% 93%;
+    --primary-foreground: 0 0% 5%;
 
-    --secondary: 41 100% 25%;
-    --secondary-foreground: 126 29% 90%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 41 100% 93%;
 
-    --muted: 41 100% 25%;
-    --muted-foreground: 126 29% 70%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 41 100% 70%;
 
-    --accent: 126 29% 60%;
-    --accent-foreground: 41 100% 90%;
+    --accent: 22 23% 30%;
+    --accent-foreground: 41 100% 93%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 41 100% 93%;
 
-    --border: 41 100% 30%;
-    --input: 41 100% 30%;
-    --ring: 126 29% 70%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 41 100% 93%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -105,6 +106,64 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-crimson;
+  }
+}
+
+@layer utilities {
+  /* Typing Animation Keyframes */
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes blink {
+    0%, 50% {
+      border-color: transparent;
+    }
+    51%, 100% {
+      border-color: currentColor;
+    }
+  }
+
+  /* Typing Animation Classes */
+  .typewriter {
+    overflow: hidden;
+    border-right: 2px solid currentColor;
+    white-space: nowrap;
+    animation: typing 3s steps(40, end), blink 1s step-end infinite;
+  }
+
+  .typewriter-delay-1 {
+    animation-delay: 0.5s;
+    animation-fill-mode: both;
+  }
+
+  .typewriter-delay-2 {
+    animation-delay: 1s;
+    animation-fill-mode: both;
+  }
+
+  .typewriter-delay-3 {
+    animation-delay: 1.5s;
+    animation-fill-mode: both;
+  }
+
+  /* Scroll-triggered typing animation */
+  .scroll-typewriter {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+    border-right: 2px solid currentColor;
+    white-space: nowrap;
+  }
+
+  .scroll-typewriter.animate {
+    opacity: 1;
+    animation: typing 2s steps(40, end) forwards, blink 1s step-end infinite;
   }
 }

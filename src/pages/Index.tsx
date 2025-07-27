@@ -1,4 +1,5 @@
 import React from "react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import {
   Play,
@@ -21,6 +22,11 @@ const Index = () => {
   // Get saved campaigns from localStorage
   const savedCampaigns = JSON.parse(localStorage.getItem('allCampaigns') || '[]');
   const allCampaigns = [...campaigns, ...savedCampaigns];
+
+  // Scroll animation hooks
+  const heroTextRef = useScrollAnimation(0.2);
+  const heroSubTextRef = useScrollAnimation(0.2);
+  const statsRef = useScrollAnimation(0.3);
   const stats = [
     { label: "Active Campaigns", value: "127", change: "+12%", icon: Film },
     { label: "Filmmakers Funded", value: "2,340", change: "+18%", icon: Users },
@@ -43,24 +49,30 @@ const Index = () => {
               Milestone-Based Film Funding
             </Badge>
           </div>
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+          <h1 
+            ref={heroTextRef as any}
+            className="scroll-typewriter text-5xl md:text-6xl font-bold italic mb-6 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent"
+          >
             Fund Independent Films{" "}
             <span className="block">One Milestone at a Time</span>
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p 
+            ref={heroSubTextRef as any}
+            className="scroll-typewriter typewriter-delay-1 text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed italic"
+          >
             Homegrown connects indie filmmakers with investors through
             structured, milestone-based funding. Build trust, reduce risk, and
             help stories rise with proof-first financing.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8">
+            <Button size="lg" className="text-lg px-8 font-crimson italic font-bold">
               <Play className="mr-2 h-5 w-5" />
               Browse Campaigns
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="text-lg px-8"
+              className="text-lg px-8 font-crimson italic font-bold"
               asChild
             >
               <Link to="/profile">Start Your Campaign</Link>
@@ -114,7 +126,10 @@ const Index = () => {
       <section className="py-16 px-4">
         <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">
+            <h2 
+              ref={statsRef as any}
+              className="scroll-typewriter text-3xl font-bold mb-4 italic font-crimson"
+            >
               Empowering Independent Cinema
             </h2>
           </div>
@@ -140,8 +155,8 @@ const Index = () => {
         <div className="container mx-auto">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-3xl font-bold mb-2">Featured Campaigns</h2>
-              <p className="text-muted-foreground">
+              <h2 className="text-3xl font-bold mb-2 italic font-crimson">Featured Campaigns</h2>
+              <p className="text-muted-foreground italic font-crimson">
                 Discover stories worth investing in
               </p>
             </div>
