@@ -168,6 +168,29 @@ export default function MilestoneManagement() {
   };
 
   const saveCampaign = () => {
+    // Calculate total milestone amount
+    const totalMilestoneAmount = milestones.reduce((sum, milestone) => sum + milestone.amount, 0);
+    
+    // Create campaign object with milestones and budget allocation
+    const campaignWithMilestones = {
+      ...campaignData,
+      milestones,
+      budgetAllocation,
+      totalMilestoneAmount,
+      currentAmount: 0, // Starting amount
+      backers: 0, // Starting backers
+    };
+
+    // Save to localStorage to persist data
+    const existingCampaigns = JSON.parse(localStorage.getItem('userCampaigns') || '[]');
+    const updatedCampaigns = [...existingCampaigns, campaignWithMilestones];
+    localStorage.setItem('userCampaigns', JSON.stringify(updatedCampaigns));
+
+    // Update global campaigns data
+    const globalCampaigns = JSON.parse(localStorage.getItem('allCampaigns') || '[]');
+    const updatedGlobalCampaigns = [...globalCampaigns, campaignWithMilestones];
+    localStorage.setItem('allCampaigns', JSON.stringify(updatedGlobalCampaigns));
+
     toast({
       title: "Campaign Saved",
       description: "Your campaign and milestones have been saved successfully",
@@ -189,9 +212,9 @@ export default function MilestoneManagement() {
   };
 
   const stageColors = {
-    "pre-production": "bg-blue-100 text-blue-800 border-blue-200",
-    production: "bg-green-100 text-green-800 border-green-200",
-    "post-production": "bg-purple-100 text-purple-800 border-purple-200",
+    "pre-production": "bg-secondary text-primary border-primary/20",
+    production: "bg-accent/20 text-accent-foreground border-accent/30",
+    "post-production": "bg-muted text-muted-foreground border-border",
   };
 
   return (

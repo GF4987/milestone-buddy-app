@@ -11,6 +11,11 @@ import { Label } from '@/components/ui/label';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useToast } from '@/hooks/use-toast';
 
+// Get user's saved campaigns
+const getUserCampaigns = () => {
+  return JSON.parse(localStorage.getItem('userCampaigns') || '[]');
+};
+
 // Mock user data
 const userData = {
   username: 'alexfilm_maker',
@@ -46,8 +51,14 @@ const userData = {
 export default function Profile() {
   const [isCreateCampaignOpen, setIsCreateCampaignOpen] = useState(false);
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
+  const [userCampaigns, setUserCampaigns] = useState(getUserCampaigns());
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  // Refresh campaigns when component mounts
+  React.useEffect(() => {
+    setUserCampaigns(getUserCampaigns());
+  }, []);
 
   const handleCreateCampaign = () => {
     navigate('/create-campaign');
@@ -167,6 +178,40 @@ export default function Profile() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
+                  {/* Show saved campaigns first */}
+                  {userCampaigns.map((project) => (
+                    <div key={project.title} className="border rounded-lg p-4">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h3 className="font-semibold">{project.title}</h3>
+                          <Badge variant="secondary" className="mt-1">
+                            Created
+                          </Badge>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-semibold text-primary">
+                            ${project.currentAmount?.toLocaleString() || '0'}
+                          </div>
+                          <div className="text-sm text-muted-foreground">
+                            of ${project.goalAmount.toLocaleString()}
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-1">
+                          <Users className="w-4 h-4" />
+                          <span>{project.backers || 0} backers</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          <span>{project.daysLeft} days left</span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                  
+                  {/* Then show mock projects */}
                   {userData.projects.map((project) => (
                     <div key={project.id} className="border rounded-lg p-4">
                       <div className="flex items-start justify-between mb-3">

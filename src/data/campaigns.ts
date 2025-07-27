@@ -1,4 +1,11 @@
-import { Milestone } from '@/components/MilestoneStatusBar';
+export interface Milestone {
+  id: string;
+  title: string;
+  amount: number;
+  status: 'completed' | 'current' | 'upcoming';
+  description: string;
+  deliverable: string;
+}
 
 export interface Campaign {
   id: string;

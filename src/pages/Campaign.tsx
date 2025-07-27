@@ -130,8 +130,13 @@ export default function Campaign() {
               </CardHeader>
               <CardContent>
                 <MilestoneStatusBar
-                  milestones={campaign.milestones}
-                  totalGoal={campaign.goalAmount}
+                  milestones={campaign.milestones.map(m => ({
+                    id: m.id,
+                    title: m.title,
+                    amount: m.amount,
+                    completed: m.status === 'completed'
+                  }))}
+                  goalAmount={campaign.goalAmount}
                   currentAmount={campaign.currentAmount}
                 />
                 <div className="mt-6 text-sm text-muted-foreground">

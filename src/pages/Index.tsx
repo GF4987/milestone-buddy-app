@@ -15,8 +15,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { campaigns } from "@/data/campaigns";
+import { MilestoneStatusBar } from "@/components/MilestoneStatusBar";
 
 const Index = () => {
+  // Get saved campaigns from localStorage
+  const savedCampaigns = JSON.parse(localStorage.getItem('allCampaigns') || '[]');
+  const allCampaigns = [...campaigns, ...savedCampaigns];
   const stats = [
     { label: "Active Campaigns", value: "127", change: "+12%", icon: Film },
     { label: "Filmmakers Funded", value: "2,340", change: "+18%", icon: Users },
@@ -145,7 +149,7 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {campaigns.map((campaign) => (
+            {allCampaigns.map((campaign) => (
               <Card
                 key={campaign.id}
                 className="overflow-hidden hover:shadow-lg transition-shadow"
@@ -193,6 +197,18 @@ const Index = () => {
                       }
                       className="h-2"
                     />
+
+                    {/* Add milestone indicators if campaign has milestones */}
+                    {campaign.milestones && (
+                      <div className="mt-3">
+                        <MilestoneStatusBar 
+                          milestones={campaign.milestones}
+                          currentAmount={campaign.currentAmount}
+                          goalAmount={campaign.goalAmount}
+                          showLabels={false}
+                        />
+                      </div>
+                    )}
 
                     <div className="flex justify-between">
                       <div>
